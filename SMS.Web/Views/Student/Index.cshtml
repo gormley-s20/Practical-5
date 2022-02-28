@@ -1,6 +1,7 @@
-@model IList<Student>
+@model IList<Student> //variable model to hold the passed Student List
 
 <h3 class="mb-3">Student List</h3>
+<a asp-controller="Student" asp-action = "Create" class ="btn btn-primary mb-3">Create</a>
 
 <table class="table table-hover">
     <thead>
@@ -13,14 +14,18 @@
         </tr>
     </thead>
     <tbody>
-
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
         
+        @foreach (var s in Model) // For each student in Model(Capital letter) -Razor syntax
+        {
+        <tr>
+                <td>@s.Id</td>
+                <td>@s.Name</td>
+                <td>@s.Course</td>
+                <td>@s.Age</td>
+                <td>
+                    <a asp-controller="Student" asp-action="Details" asp-route-id="@s.Id">View</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

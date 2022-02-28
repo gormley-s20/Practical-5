@@ -7,7 +7,23 @@
 <div>
    
     <div class="card rounded shadow p-3">
-         <!-- display the student using a <dl> as per Details.cshtml -->     
+         <!-- display the student using a <dl> as per Details.cshtml --> 
+           <dl class="row">       
+            <dt class="col-5">Name</dt>
+            <dd class="col-7">@Model.Name</dd>
+
+            <dt class="col-5">Course</dt>
+            <dd class="col-7">@Model.Course</dd>
+            
+            <dt class="col-5">Age</dt>
+            <dd class="col-7">@Model.Age</dd>
+            
+            <dt class="col-5">Email</dt>
+            <dd class="col-7">@Model.Email</dd>
+
+                <dt class="col-5">Classification</dt>
+            <dd class="col-7">@Model.Classification</dd>
+        </dl>    
     
     </div>
 
@@ -15,7 +31,13 @@
         <!-- create a form to submit post request to DeleteConfirm action     --> 
         <!-- student Id should be a hidden input field named 'Id' in the form -->      
         <!-- add type submit input button and cancel link to Index action     -->
-        
+        <form asp-action="DeleteConfirm">
+          <input type= "hidden" asp-for= "@Model.Id"/>
+          <div class="mt-3">
+            <input type="submit" value="Delete" class="btn btn-danger"/>
+            <a class="btn btn-secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+        </div> 
+        </form>
     </div>
     
 </div>

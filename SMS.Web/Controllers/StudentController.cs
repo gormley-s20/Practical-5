@@ -19,9 +19,10 @@ namespace SMS.Web.Controllers
         public IActionResult Index()
         {
             // TBC - load students using service and pass to view
-           
-            
-            return View();
+           //return a list of students 
+            var students = svc.GetStudents();
+            // pass list of studentss to the view
+            return View(students);
         }
 
         // GET /student/details/{id}
@@ -31,6 +32,14 @@ namespace SMS.Web.Controllers
             var s = svc.GetStudent(id);
 
             // TBC check if s is null and return NotFound()
+
+            if (s == null)
+            {
+               
+            //display 404 page to user   
+            return NotFound();
+
+            }
             
 
             // pass student as parameter to the view
@@ -41,6 +50,7 @@ namespace SMS.Web.Controllers
         public IActionResult Create()
         {
             // display blank form to create a student
+            
             return View();
         }
 
@@ -52,6 +62,8 @@ namespace SMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 // TBC call service AddStudent method using data in s
+                 svc.AddStudent(s.Name, s.Course,s.Email, s.Age, s.Grade, s.PhotoUrl);
+
                 
                 return RedirectToAction(nameof(Index));
             }
@@ -68,6 +80,11 @@ namespace SMS.Web.Controllers
 
             // TBC check if s is null and return NotFound()
               
+            if (s == null)
+            {
+                return NotFound();
+            }     
+              
 
             // pass student to view for editing
             return View(s);
@@ -81,6 +98,7 @@ namespace SMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 // TBC pass data to service to update
+                svc.AddStudent(s.Name, s.Course,s.Email, s.Age, s.Grade, s.PhotoUrl);
                
 
                 return RedirectToAction(nameof(Index));
@@ -110,6 +128,7 @@ namespace SMS.Web.Controllers
         public IActionResult DeleteConfirm(int id)
         {
             // TBC delete student via service
+            svc.DeleteStudent(id);
            
             
             // redirect to the index view
